@@ -138,6 +138,11 @@ http://localhost:8000/orders/create/
   "task_id": "celery-task-id"
 }
 
+## Sample Order API Response
+
+Below is a sample response from the Order Creation API executed via browser/Postman:
+
+![Order API Response](screenshots/order_api_response.png)
 
 
 ### Step 9: Docker Usage Summary

@@ -1,0 +1,39 @@
+
+version: '3.9'
+
+services:
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      DJANGO_SETTINGS_MODULE: project.settings
+    depends_on:
+      - db
+      - redis
+
+  celery:
+    build: .
+    command: celery -A project worker -l info
+    volumes:
+      - .:/app
+    environment:
+      DJANGO_SETTINGS_MODULE: project.settings
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: aforro
+      POSTGRES_USER: aforro
+      POSTGRES_PASSWORD: aforro
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7

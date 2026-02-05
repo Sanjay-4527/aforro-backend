@@ -60,9 +60,10 @@ aforro-backend/
 Make sure Docker and Docker Compose are installed.
 
 Verify using:
-```bash
+
 docker --version
 docker compose version
+
 
 ## Step 2: Unzip the Project
 
@@ -70,6 +71,7 @@ After downloading the submission ZIP file:
 
 unzip aforro-backend-submission.zip
 cd aforro-backend
+
 
 
 ### Step 3: Start All Services Using Docker
@@ -86,17 +88,30 @@ This command starts:
 
 docker compose up --build -d
 
+
+
 ### Step 4: Apply Database Migrations
 
 docker compose exec web python manage.py migrate
+
+
 
 ### Step 5: Create Admin User
 
 docker compose exec web python manage.py createsuperuser
 
+### Admin Access:
+Django admin is enabled. Reviewers can create their own admin user using
+
+docker compose exec web python manage.py createsuperuser
+
+
+
 ### Step 6: Seed Sample Data
 
 docker compose exec web python manage.py seed_data
+
+
 
 ### Step 7: Run Tests
 
@@ -110,7 +125,11 @@ docker compose exec web python manage.py test
 
 http://localhost:8000/admin/
 
+
+
 ## Check Order API of JSON Response (Async via Celery)
+
+http://localhost:8000/orders/create/
 
 # Sample Response: 
 
@@ -118,6 +137,7 @@ http://localhost:8000/admin/
   "message": "Order received",
   "task_id": "celery-task-id"
 }
+
 
 
 ### Step 9: Docker Usage Summary
@@ -134,6 +154,7 @@ docker compose down
 
 docker compose logs web
 docker compose logs celery
+
 
 
 ### Scalability Considerations
